@@ -52,7 +52,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'my_second_project.urls'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'sub_app','media') 
+MEDIA_ROOT = os.path.join(BASE_DIR,'sub_app','media') 
 MEDIA_URL = '/media/'
 
 TEMPLATES = [

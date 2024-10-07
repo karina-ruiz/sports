@@ -1,3 +1,4 @@
-hola 
-{% for in product
-    {{product.price}} %}
+    {% for product in products %}
+        {{ product.article_name }}
+        <img src="{{ product.photo.url }}"/>
+    {% endfor %}
