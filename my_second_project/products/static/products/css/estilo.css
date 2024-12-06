@@ -1,0 +1,36 @@
+.descripcion {
+    text-align: center;
+}
+#header {
+    height: 30%;
+    width: 100%;
+}
+.search-button {
+    position: absolute;
+    top: 10%;  /* Ajusta la posición vertical */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white; /* Color del texto del botón */
+    background-color: grey;
+    font-size: x-large;
+    border-radius: 10px;
+    text-align: center;
+    width: 800px;
+    outline: none;
+}
+.button-search {
+    position: absolute;
+    top: 10%; 
+    right: 10%;
+    transform: translate(-50%, -50%);
+    color: white; 
+    background-color: rgb(143, 23, 23);
+    font-size: x-large;
+    border-radius: 10px;
+    text-align: center;
+    width: 100px;
+    outline: none;
+}
+.image {
+    padding: 1cm 1cm 1cm 1cm;
+}

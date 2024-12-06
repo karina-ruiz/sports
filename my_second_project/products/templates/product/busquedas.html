@@ -1,16 +1,7 @@
-{% extends "base.html" %}
+{% extends "base.html"%}
 {% block content %}
-<header class="bg-white">
-  <div class="form-outline">
-    <img src="https://static.oysho.net/6/photos2/2024/I/M/3/p/9361/904/479/9361904479_7_1_0.jpg?t=1729167893754&imwidth=2048" class="img-container">
-    <form method="GET" action="{% url 'buscar_producto' %}">
-      <input class="search-button" type="text" name="buscar" placeholder="Buscar producto...">
-      <button class="button-search" type="submit">Buscar</button>
-    </form>
-  </div>
-</header>
-<body>
-    <div class="p-3 mb-2 bg-light text-dark grid grid-cols-10 gap-4 md:grid-cols-4 md:gap-8 mt-8">
+Resultados de busqueda
+<div class="p-3 mb-2 bg-light text-dark grid grid-cols-10 gap-4 md:grid-cols-4 md:gap-8 mt-8">
     {% for product in products %}
     <a href="{% url 'product_detail' pk=product.pk %}" class="group block overflow-hidden">
         <div class="relative h-[350px] sm:h-[450px]">
@@ -30,5 +21,9 @@
         <a>No hay productos disponibles.</a>
     {% endfor %}
     </div>
-</body>
-{% endblock content %}
+
+
+
+
+
+{% endblock %}
