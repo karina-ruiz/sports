@@ -1,11 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 <header class="bg-white">
-  <div class="form-outline">
-    <img src="https://static.oysho.net/6/photos2/2024/I/M/3/p/9361/904/479/9361904479_7_1_0.jpg?t=1729167893754&imwidth=2048" class="img-container">
+  <div class="form-outline" id="cabezera">
     <form method="GET" action="{% url 'buscar_producto' %}">
-      <input class="search-button" type="text" name="buscar" placeholder="Buscar producto...">
-      <button class="button-search" type="submit">Buscar</button>
+        <input class="search-button input-cabecera" type="text" name="buscar" placeholder="Buscar producto...">
     </form>
   </div>
 </header>
