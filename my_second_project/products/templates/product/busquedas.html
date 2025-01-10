@@ -1,29 +1,19 @@
 {% extends "base.html"%}
 {% block content %}
-Resultados de busqueda
-<div class="p-3 mb-2 bg-light text-dark grid grid-cols-10 gap-4 md:grid-cols-4 md:gap-8 mt-8">
+  <div class="p-3 mb-2 bg-light text-dark grid grid-cols-10 gap-4 md:grid-cols-4 md:gap-8 mt-8">
     {% for product in products %}
-    <a href="{% url 'product_detail' pk=product.pk %}" class="group block overflow-hidden">
+      <a href="{% url 'product_detail' pk=product.pk %}" class="group block overflow-hidden">
         <div class="relative h-[350px] sm:h-[450px]">
-            <img src="{{ product.photo.url }}" alt="{{ product.name }}">
-      
-          
+          <img src="{{ product.photo.url }}" alt="{{ product.name }}">
         </div>
         <div class="relative bg-white pt-3">
-          <h3 class="text-sm text-gray-700 group-hover:underline group-hover:underline-offset-4">
-            {{product.article_name}}
-          </h3>
+          <h3 class="text-sm text-gray-700 group-hover:underline group-hover:underline-offset-4">{{product.name}}</h3>
           <p>{{product.size}}</p>
           <p class="mt-1.5 tracking-wide text-gray-900">${{product.price}}</p>
         </div>
       </a>
-    {% empty %}
+      {% empty %}
         <a>No hay productos disponibles.</a>
     {% endfor %}
-    </div>
-
-
-
-
-
+  </div>
 {% endblock %}

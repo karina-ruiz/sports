@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Product, Size, Color
+from .models import Product
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('article_name', 'price', 'detail', 'photo', 'get_sizes', 'get_colors')
+    list_display = ('name', 'price', 'detail', 'photo', 'get_sizes', 'get_colors')
 
     def get_sizes(self, obj):
         return ", ".join([size.name for size in obj.sizes.all()])
@@ -13,5 +13,3 @@ class ProductAdmin(admin.ModelAdmin):
     get_colors.short_description = 'Colores'  
 
 admin.site.register(Product, ProductAdmin)
-admin.site.register(Size)
-admin.site.register(Color)
