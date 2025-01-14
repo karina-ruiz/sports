@@ -24,7 +24,7 @@ def buscar_producto(request):
 
     if 'buscar' in request.GET:
         search_term = request.GET['buscar']
-        products = Product.objects.filter(article_name__icontains=search_term)
+        products = Product.objects.filter(name__icontains=search_term)
     return render(request, 'Product/busquedas.html', {'products': products})
 class UserRegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
