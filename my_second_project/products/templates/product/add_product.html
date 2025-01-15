@@ -8,24 +8,20 @@
   </div>
 </header>
 <body>
-    <div class="p-3 mb-2 bg-light text-dark grid grid-cols-10 gap-4 md:grid-cols-4 md:gap-8 mt-8">
-    {% for product in products %}
-    <a href="#" class="group block overflow-hidden">
-        <div class="relative h-[350px] sm:h-[450px]">
-            <img src="{{ product.photo.url }}" alt="{{ product.name }}">
-          
-        </div>
-        <div class="relative bg-white pt-3">
-          <h3 class="text-sm text-gray-700 group-hover:underline group-hover:underline-offset-4">
-            {{product.name}}
-          </h3>
-          <p>{{product.price}}</p>
-          <p class="mt-1.5 tracking-wide text-gray-900">${{product.price}}</p>
-        </div>
-      </a>
-    {% empty %}
-        <a>No hay productos disponibles.</a>
-    {% endfor %}
+<div class="pagina-principal">
+  <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://cdn.shopify.com/s/files/1/2531/5032/files/DSC_6138_cambiar_tamano_large.jpg?v=1591289567" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="https://cdn.shopify.com/s/files/1/2531/5032/files/DSC_6138_cambiar_tamano_large.jpg?v=1591289567" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="https://cdn.shopify.com/s/files/1/2531/5032/files/DSC_6138_cambiar_tamano_large.jpg?v=1591289567" alt="...">
+      </div>
     </div>
+  </div>
+</div>  
 </body>
 {% endblock content %}

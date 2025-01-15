@@ -1,15 +1,28 @@
 #cabezera {
     height: 4cm;
-    background-color: rgb(124, 124, 124);
+    background-color: #040404;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .input-cabecera {
-    background-color: black;
-    border-radius: 15px;
-    padding: 10px;
+    background-color: #e7e5e7;
+    border-radius: 10px;
+    padding: 5px;
     font-size: 16px;
-    width: 500px;
+    width: 700px;
     text-align: center;
+    outline: none !important;
+}
+.pagina-principal {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    margin-top: 1cm;
+    background-color: #040404;
+
+}
+#carouselExampleSlidesOnly {
+    margin-left: 10cm;
+    width: 50cm;
 }
