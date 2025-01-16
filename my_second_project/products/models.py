@@ -10,7 +10,7 @@ class Product(models.Model):
     categoria =  models.TextField(max_length=100, verbose_name="categoria", null=True)
     size =  models.TextField(max_length=100, verbose_name="talla", null=True)
     color =  models.TextField(max_length=100, verbose_name="color", null=True)
-    price = models.DecimalField(max_digits=9, decimal_places=6, verbose_name="precio", null=True)
+    price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name="precio", null=True)
     unit_cost = models.DecimalField(max_digits=9, decimal_places=2, verbose_name="costo_unitario", null=True)
     available = models.BooleanField(default="True", verbose_name="disponible", null=True)
 
