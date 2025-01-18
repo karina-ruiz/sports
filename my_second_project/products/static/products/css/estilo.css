@@ -1,9 +1,10 @@
 #cabezera {
     height: 4cm;
-    background-color: #040404;
+    background-color: #060606;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 #carouselExampleSlidesOnly {
     margin-left: 10cm;
@@ -27,4 +28,8 @@
 }
 .categorias {
     padding: 1em;
+}
+.custom-icon {
+    font-size: 3rem; 
+    color: #f3eeed;
 }

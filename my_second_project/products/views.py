@@ -5,14 +5,19 @@ from django.contrib.auth.models import User
 from django import forms
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+
 class ProductListView(generic.ListView):
     model = Product
-    template_name = "Product/add_product.html"
+    template_name = "product/add_product.html"
     context_object_name = "products"
 
+class RopaListView(generic.ListView):
+    model = Product
+    template_name = "product/ropa.html"
+    context_object_name = "ropa"
 class ProductDetailView(generic.DetailView):
     model = Product
-    template_name = "Product/detalles.html"
+    template_name = "product/detalles.html"
     context_object_name = "detalle"
 
     def get_queryset(self):
