@@ -1,20 +1,19 @@
 from django.views import generic
-from .models import Product
+from .models import Product, Categoria
 from django.shortcuts import render
-from django.contrib.auth.models import User
-from django import forms
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-
 class ProductListView(generic.ListView):
     model = Product
-    template_name = "product/add_product.html"
+    template_name = "product/principal.html"
     context_object_name = "products"
 
-class RopaListView(generic.ListView):
-    model = Product
-    template_name = "product/ropa.html"
-    context_object_name = "ropa"
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categorias'] = Categoria.objects.all()
+        categoria_id = kwargs.get('categoria_id')
+        if categoria_id:
+            context['productos_categoria'] = Product.objects.filter(categoria__id=categoria_id)
+        return context
+
 class ProductDetailView(generic.DetailView):
     model = Product
     template_name = "product/detalles.html"
@@ -31,31 +30,3 @@ def buscar_producto(request):
         search_term = request.GET['buscar']
         products = Product.objects.filter(name__icontains=search_term)
     return render(request, 'Product/busquedas.html', {'products': products})
-class UserRegisterForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-
-    class Meta:
-        model = User
-        fields = [ 'username', 'email', 'password']
-
-def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])
-            user.save()
-            return redirect('login')
-    else:
-        form = UserRegisterForm()
-    return render(request, 'products/register.html', {'form': form})    
-
-def user_login(request):
-    if request.method == 'POST':
-        username = request.POST['userme']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('home')
-    return render(request, 'login.html')
