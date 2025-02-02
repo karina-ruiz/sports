@@ -11,7 +11,7 @@
 <div class="row categorias">
   <div class="col">
     {% for categoria in categorias %}
-      <a class="categorias_individuales" href="#">{{ categoria.nombre }}</a>
+      <a class="categorias_individuales" href="{% url 'categoria_detalle' categoria.id %}">{{ categoria.nombre }}</a>
     {% empty %}
       <p>No hay categorías disponibles</p>
     {% endfor %}

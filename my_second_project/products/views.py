@@ -1,6 +1,6 @@
 from django.views import generic
 from .models import Product, Categoria
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 class ProductListView(generic.ListView):
     model = Product
     template_name = "product/principal.html"
@@ -13,6 +13,22 @@ class ProductListView(generic.ListView):
         if categoria_id:
             context['productos_categoria'] = Product.objects.filter(categoria__id=categoria_id)
         return context
+
+
+def categoria_detalle(request, categoria_id):
+    # Obtener la categoría
+    categoria = get_object_or_404(Categoria, pk=categoria_id)
+
+    # Filtrar productos por categoría
+    products = Product.objects.filter(categoria=categoria)
+
+    # Debugging: imprimir el número de productos
+    print(f'Número de productos en la categoría {categoria.nombre}: {len(products)}')
+
+    return render(request, 'product/lista_categorias.html', {
+        'categoria': categoria,
+        'products': products,
+    })
 
 class ProductDetailView(generic.DetailView):
     model = Product
