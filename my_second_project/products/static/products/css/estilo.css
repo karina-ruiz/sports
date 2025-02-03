@@ -4,16 +4,30 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
 }
 #carouselExampleSlidesOnly {
-    margin-left: 10cm;
-    width: 50cm;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#image-carrusel {
+    width: 500px;
+    height: 500px;
+    justify-content: center;
+    align-items: center;
+}
+#carrito{
+    position: absolute;
+    top: 12.5%;
+    right: 100px;
+    transform: translateY(-50%);
+    color: aliceblue;
+    font-size: 40px;
 }
 .input-cabecera {
     background-color: #e7e5e7;
     border-radius: 10px;
-    font-size: 16px;
+    font-size: 20px;
     width: 700px;
     text-align: center;
     outline: none !important;
@@ -21,8 +35,9 @@
 .pagina-principal {
     width: 100%;
     height: 100%;
-    align-items: center;
     background-color: #040404;
+    justify-content: center;
+    align-items: center;
 
 }
 .categorias {
@@ -30,9 +45,4 @@
 }
 .categorias_individuales {
     padding: 3cm;
-}
-.custom-icon {
-    font-size: 2rem; 
-    color: #f3eeed;
-    padding-left: 2cm;
 }
