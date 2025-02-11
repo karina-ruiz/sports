@@ -5,7 +5,16 @@
     <form method="GET" action="{% url 'buscar_producto' %}">
         <input class="search-button input-cabecera" type="text" name="buscar" placeholder="Buscar producto...">
     </form>
-    <a href="{% url "login" %}"><i id="carrito" class="bi bi-cart custom-icon"></i></a>
+    <a href="{% url 'basket:basket_summary' %}" id="carrito" type="button" class="btn btn-light">
+      {% with total_qty=basket|length %}
+        {% if total_qty > 0 %}
+          <div id="basket-qty" class="d_inline_flex">{{ total_qty }}</div>
+        {% else %}
+          0
+        {% endif %} 
+      {% endwith %} 
+      <i class="bi bi-cart custom-icon"></i>
+    </a>
   </div>
 </header>
 <div class="row categorias">

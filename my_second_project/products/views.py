@@ -16,15 +16,9 @@ class ProductListView(generic.ListView):
 
 
 def categoria_detalle(request, categoria_id):
-    # Obtener la categoría
     categoria = get_object_or_404(Categoria, pk=categoria_id)
-
-    # Filtrar productos por categoría
     products = Product.objects.filter(categoria=categoria)
-
-    # Debugging: imprimir el número de productos
     print(f'Número de productos en la categoría {categoria.nombre}: {len(products)}')
-
     return render(request, 'product/lista_categorias.html', {
         'categoria': categoria,
         'products': products,
@@ -46,3 +40,4 @@ def buscar_producto(request):
         search_term = request.GET['buscar']
         products = Product.objects.filter(name__icontains=search_term)
     return render(request, 'Product/busquedas.html', {'products': products})
+

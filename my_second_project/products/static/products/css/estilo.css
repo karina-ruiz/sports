@@ -1,11 +1,16 @@
+#body{
+    margin: 0;
+    padding: 0;
+}
 #cabezera {
     height: 4cm;
-    background-color: #060606;
+    background-color: #f6eeee;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 #carouselExampleSlidesOnly {
+    top: 1cm;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,11 +26,12 @@
     top: 12.5%;
     right: 100px;
     transform: translateY(-50%);
-    color: aliceblue;
-    font-size: 40px;
+    color: rgb(13, 13, 13);
+    font-size: 20px;
+    height: 40px;
 }
-.input-cabecera {
-    background-color: #e7e5e7;
+.input-cabecera{
+    background-color: hsl(0, 100%, 100%);
     border-radius: 10px;
     font-size: 20px;
     width: 700px;

@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.conf import settings
     
 class Categoria(models.Model):
     nombre = models.TextField(null=True)
@@ -23,8 +24,21 @@ class Product(models.Model):
     def __str__(self):
         return self.name if self.name else "Producto sin nombre"
 
-class Inventario(models.Model):
-    initial_amount = models.DecimalField(max_digits=9, decimal_places=6, null=True)
-    entradas = models.IntegerField(null="True")
-    salidas = models.IntegerField(null="True")
-    stock_actual = models.IntegerField(null="True")
+class Order(models.Model):  
+    full_name = models.CharField(max_length=255)
+    address = models.TextField()
+    telephone_number = models.CharField(max_length=15)
+    email = models.EmailField()
+    created_id = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, default="pending")
+
+    def __str__(self):
+        return f"Order {self.id} by {self.full_name}"
+    
+class OrderItem(models.Model):
+    order = models.ForeignKey('Order', related_name='items', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)  
+    quantity = models.PositiveIntegerField() 
+
+    def __str__(self):
+        return f'{self.product.name} x {self.quantity}'
