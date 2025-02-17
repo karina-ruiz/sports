@@ -1,54 +1,83 @@
-#body{
-    margin: 0;
-    padding: 0;
-}
 #cabezera {
-    height: 4cm;
-    background-color: #f6eeee;
+    height: 2cm;
+    background-color: #ffffff;
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
 }
-#carouselExampleSlidesOnly {
-    top: 1cm;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#logo {
+   display: flex;
+   align-items: center;
+   justify-content: flex-start;
+   width: 200px;
+
 }
-#image-carrusel {
-    width: 500px;
-    height: 500px;
-    justify-content: center;
-    align-items: center;
+.carrito {
+    position: relative;
+    display: inline-block;
+    background-color: #b5b5b5;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 16px;
+    margin-right: 1cm;
+  }
+#carrito:hover {
+    background-color: #e8e8e8;
+    transform: scale(1.05); 
 }
-#carrito{
+#basket-qty {
     position: absolute;
-    top: 12.5%;
-    right: 100px;
-    transform: translateY(-50%);
-    color: rgb(13, 13, 13);
-    font-size: 20px;
-    height: 40px;
+    top: -5px; 
+    right: -10px;
+    background-color: #b5b5b5;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#carrito .bi-bag-fill {
+    font-size: 24px;
+}
+  
+#carrito:active {
+    transform: scale(0.98); 
 }
 .input-cabecera{
-    background-color: hsl(0, 100%, 100%);
-    border-radius: 10px;
+    background-color: #e8e8e8;  
     font-size: 20px;
-    width: 700px;
+    width: 200px;
     text-align: center;
     outline: none !important;
+    margin-right: 1cm;
+    border-radius: 1cm;
 }
 .pagina-principal {
     width: 100%;
     height: 100%;
-    background-color: #040404;
+    background-color: #a7a1a1;
     justify-content: center;
     align-items: center;
 
 }
 .categorias {
-    padding: 2em;
+    padding: 1em;
+    background-color: #b5b5b5;
 }
-.categorias_individuales {
-    padding: 3cm;
+.categorias_individuales { 
+    padding-left: 5cm;
+    text-decoration: none;
+}
+.cabecera_list {
+    height: 2cm;
+    background-color: #e8e8e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

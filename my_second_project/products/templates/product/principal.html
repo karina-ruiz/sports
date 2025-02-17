@@ -1,46 +1,102 @@
 {% extends "base.html" %}
 {% block content %}
 <header class="bg-white">
-  <div class="form-outline" id="cabezera">
-    <form method="GET" action="{% url 'buscar_producto' %}">
-        <input class="search-button input-cabecera" type="text" name="buscar" placeholder="Buscar producto...">
+  <div class="container d-flex justify-content-between align-items-center py-3">
+
+    <form method="GET" action="{% url 'buscar_producto' %}" class="d-flex">
+      <input class="form-control form-control-sm" type="text" name="buscar" placeholder="Buscar">
     </form>
-    <a href="{% url 'basket:basket_summary' %}" id="carrito" type="button" class="btn btn-light">
+    
+    
+    <a href="{% url 'basket:basket_summary' %}" class="btn btn-outline-secondary position-relative carrito">
+      
       {% with total_qty=basket|length %}
-        {% if total_qty > 0 %}
-          <div id="basket-qty" class="d_inline_flex">{{ total_qty }}</div>
-        {% else %}
-          0
-        {% endif %} 
-      {% endwith %} 
-      <i class="bi bi-cart custom-icon"></i>
+        <div id="basket-qty" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          {% if total_qty > 0 %}
+            {{ total_qty }}
+          {% else %}
+            0
+          {% endif %}
+        </div>
+      {% endwith %}
+      <i class="bi bi-bag-fill" style="font-size: 24px;"></i>
     </a>
   </div>
 </header>
-<div class="row categorias">
-  <div class="col">
+
+
+<div class="container">
+  <div class="row categorias d-flex justify-content-start">
     {% for categoria in categorias %}
-      <a class="categorias_individuales" href="{% url 'categoria_detalle' categoria.id %}">{{ categoria.nombre }}</a>
+      <div class="col-auto mb-3">
+        <a class="categorias_individuales d-block" href="{% url 'categoria_detalle' categoria.id %}">{{ categoria.nombre }}</a>
+      </div>
     {% empty %}
       <p>No hay categorías disponibles</p>
     {% endfor %}
   </div>
 </div>
-<body>
-<div class="pagina-principal">
-  <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-    <div id="image-carrusel" class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="https://cdn.shopify.com/s/files/1/2531/5032/files/DSC_6138_cambiar_tamano_large.jpg?v=1591289567" alt="...">
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
+  {% for product in products %}
+      <div class="h-auto bg-gray-200 rounded-lg shadow-lg">
+          <a href="{% url 'product_detail' pk=product.id %}" class="group relative block overflow-hidden no-underline text-current hover:no-underline">
+              
+              <button class="absolute top-4 right-4 z-10 rounded-full bg-white p-2 text-gray-900 transition hover:text-gray-900/75">
+                  <span class="sr-only">Wishlist</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                  </svg>
+              </button>
+
+              {% if product.photo %}
+                  <img src="{{ product.photo.url }}" alt="{{ product.name }}" class="w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72 lg:h-80"/>
+              {% endif %}
+
+              <div class="relative border border-gray-100 bg-white p-6">
+                  <h3 class="mt-4 text-lg font-medium text-gray-900">{{ product.name }}</h3>
+                  <p class="mt-2 text-sm text-gray-700">${{ product.price }}</p>
+              </div>
+          </a>
+
+          <div class="p-6 bg-white">
+            <label for="select" class="block text-sm text-gray-700">Cantidad</label>
+            <select id="select" class="w-full mt-2 p-2 border border-gray-300 rounded-md">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+            <button type="button" class="w-full mt-4 rounded bg-black p-4 text-white font-medium transition hover:scale-105" data-product-id="{{ product.id }}">
+              Agregar al carrito
+            </button>
+          </div>  
       </div>
-      <div class="carousel-item">
-        <img src="https://scontent.fgdl10-1.fna.fbcdn.net/v/t39.30808-1/328273044_5584799178313828_3476104746333624048_n.jpg?stp=dst-jpg_s480x480_tt6&_nc_cat=109&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=WAc4feVNMaAQ7kNvgHEgWFU&_nc_oc=AdgJ7nJdMKRN4sMyKRU3zccbGO5ZOFdp7kSrp7GT9Rg3q8RHIzI4OCIO9K4G7zdguoTV6TM9_SiLKetzlia9AMj3&_nc_zt=24&_nc_ht=scontent.fgdl10-1.fna&_nc_gid=A8P74INT0Hi_C0XE9iM-lEq&oh=00_AYCImwjTs-rZ6mm9lrkJh5vy0V4Djegz54PVo5HPPvtLkQ&oe=67A6D8AC" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="https://www.auraleisure.ie/wp-content/uploads/2023/03/john-arano-h4i9G-de7Po-unsplash-1-scaled.jpg" alt="...">
-      </div>
-    </div>
-  </div>
-</div>  
-</body>
+  {% endfor %}
+</div>
+
+<script>
+  $(document).on("click", ".w-full.mt-4.rounded.bg-black", function(e) {
+    e.preventDefault();
+    var productId = $(this).data("product-id");  
+    var productQty = $("#select option:selected").val();  
+    $.ajax({
+      type: "POST",
+      url: "{% url 'basket:basket_add' %}",
+      data: {
+        productid: productId,  
+        productqty: productQty,  
+        csrfmiddlewaretoken: "{{csrf_token}}", 
+        action: "post"
+      },
+      success: function(json) {
+        document.getElementById("basket-qty").innerHTML = json.qty;  
+      },
+      error: function(xhr, errmsg, err) {}
+    });       
+ });
+ 
+</script>
+
+
 {% endblock content %}
