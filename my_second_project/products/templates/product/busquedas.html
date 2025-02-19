@@ -1,18 +1,6 @@
- <!--  
-{% extends "base.html" %}
+
+{% extends "principal.html" %}
 {% block content %}
-<header class="bg-white">
-    <div class="container d-flex justify-content-between align-items-center py-3">
-  
-      <form method="GET" action="{% url 'buscar_producto' %}" class="d-flex">
-        <input class="form-control form-control-sm" type="text" name="buscar" placeholder="Buscar">
-      </form>
-      
-      
-        
-    </div>
-  </header>
-  
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
     {% for product in products %}
         <div class="h-auto rounded-lg bg-gray-200 shadow-lg overflow-hidden">
@@ -46,13 +34,35 @@
 
                 <form action="{% url 'buscar_producto' %}" method="post" class="mt-4">
                     {% csrf_token %}
-                    <button type="button" id="add-button" value="{{product.id}}" class="w-full mt-4 rounded bg-black p-4 text-white font-medium transition hover:scale-105">
+                    <button type="button" class="w-full mt-4 rounded bg-black p-4 text-white font-medium transition hover:scale-105" data-product-id="{{ product.id }}">
                         Agregar al carrito
-                    </button>
+                      </button>
                 </form>
             </div>
         </div>
     {% endfor %}
 </div>
-
+<script>
+    $(document).on("click", ".w-full.mt-4.rounded.bg-black", function(e) {
+      e.preventDefault();
+      var productId = $(this).data("product-id");  
+      var productQty = $("#select option:selected").val();  
+      $.ajax({
+        type: "POST",
+        url: "{% url 'basket:basket_add' %}",
+        data: {
+          productid: productId,  
+          productqty: productQty,  
+          csrfmiddlewaretoken: "{{csrf_token}}", 
+          action: "post"
+        },
+        success: function(json) {
+          document.getElementById("basket-qty").innerHTML = json.qty;  
+        },
+        error: function(xhr, errmsg, err) {}
+      });       
+   });
+   
+</script>
+  
 {% endblock %}
