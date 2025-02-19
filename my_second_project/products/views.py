@@ -3,7 +3,7 @@ from .models import Product, Categoria
 from django.shortcuts import render, get_object_or_404
 class ProductListView(generic.ListView):
     model = Product
-    template_name = "product/principal.html"
+    template_name = "base.html"
     context_object_name = "products"
 
     def get_context_data(self,**kwargs):

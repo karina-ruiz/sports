@@ -1,5 +1,5 @@
 
-{% extends "principal.html" %}
+{% extends "base.html" %}
 {% block content %}
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
     {% for product in products %}
@@ -22,47 +22,5 @@
                     <p class="mt-1.5 text-sm text-gray-700">${{ product.price }}</p>
                 </div>
             </a>
-
-            <div class="p-6 bg-white">
-                <label for="select" class="block text-sm text-gray-700">Cantidad</label>
-                <select id="select" class="w-full mt-2 p-2 border border-gray-300 rounded-md">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
-
-                <form action="{% url 'buscar_producto' %}" method="post" class="mt-4">
-                    {% csrf_token %}
-                    <button type="button" class="w-full mt-4 rounded bg-black p-4 text-white font-medium transition hover:scale-105" data-product-id="{{ product.id }}">
-                        Agregar al carrito
-                      </button>
-                </form>
-            </div>
-        </div>
-    {% endfor %}
-</div>
-<script>
-    $(document).on("click", ".w-full.mt-4.rounded.bg-black", function(e) {
-      e.preventDefault();
-      var productId = $(this).data("product-id");  
-      var productQty = $("#select option:selected").val();  
-      $.ajax({
-        type: "POST",
-        url: "{% url 'basket:basket_add' %}",
-        data: {
-          productid: productId,  
-          productqty: productQty,  
-          csrfmiddlewaretoken: "{{csrf_token}}", 
-          action: "post"
-        },
-        success: function(json) {
-          document.getElementById("basket-qty").innerHTML = json.qty;  
-        },
-        error: function(xhr, errmsg, err) {}
-      });       
-   });
-   
-</script>
-  
 {% endblock %}
+            
