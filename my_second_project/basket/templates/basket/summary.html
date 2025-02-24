@@ -62,7 +62,7 @@
         TOTAL <span id="subtotal">${{ basket.get_total_price }}</span>
       </div>
       <a
-        href="#"
+        href="{% url 'basket:basket_payment_form' %}"
         class="block rounded-sm bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
         aria-label="Checkout"
       >

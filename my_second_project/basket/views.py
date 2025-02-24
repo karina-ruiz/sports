@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from products.models import Product
 from .basket import Basket
+from .form import PaymentForm
 
 
 def basket_summary(request):
@@ -31,3 +32,10 @@ def basket_delete(request):
         basket.delete(product=product_id)
         response = JsonResponse({'Success': True})
         return response
+
+
+def payment_form_view(request):
+    form = PaymentForm()
+    return render(request, 'basket/form_cart.html', {'form': form})
+
+
