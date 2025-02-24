@@ -66,14 +66,6 @@
     align-items: center;
 
 }
-.categorias {
-    padding: 1em;
-    background-color: #b5b5b5;
-}
-.categorias_individuales { 
-    padding-left: 5cm;
-    text-decoration: none;
-}
 .cabecera_list {
     height: 2cm;
     background-color: #e8e8e8;

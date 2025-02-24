@@ -1,9 +1,9 @@
-{% extends "base.html"%}
+{% extends "base.html" %}
 {% block content %}
 <div class="min-h-screen flex items-center justify-center">
   <div class="flex flex-col sm:flex-row bg-white shadow-lg rounded-lg overflow-hidden w-full max-w-4xl">
     <div class="flex-none w-full sm:w-1/2 relative">
-      <img src="{{ detalle.photo.url }}" alt="{{ detalle.name }}" class="w-full h-full object-cover">
+      <img src="{{ detalle.photo.url }}" alt="{{ detalle.name }}" class="w-full h-full object-cover" aria-label="Imagen de {{ detalle.name }}">
     </div>
     <form class="flex-auto p-6">
       <div class="flex flex-wrap">
@@ -19,19 +19,42 @@
       </div>
       <div class="flex items-baseline mt-4 mb-6 pb-6 border-b border-slate-200">
       </div>
-      <div class="flex space-x-4 mb-6 text-sm font-medium">
-        <div class="flex-auto flex space-x-4">
-          <button class="h-10 px-6 font-semibold rounded-md bg-black text-white" type="submit">
-            Comprar
-          </button>
-        </div>
-        <button class="flex-none flex items-center justify-center w-9 h-9 rounded-md text-slate-300 border border-slate-200" type="button" aria-label="Like">
-          <svg width="20" height="20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-          </svg>
-        </button>
-      </div>
+      <label for="select-{{ detalle.id }}" class="block text-sm text-gray-700">Cantidad</label>
+      <select id="select-{{ detalle.id }}" class="w-full mt-2 p-2 border border-gray-300 rounded-md">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+      <button type="button" class="w-full mt-4 rounded bg-black p-4 text-white font-medium transition hover:scale-105" data-product-id="{{ detalle.id }}">
+        Agregar al carrito
+      </button>
     </form>
   </div>
 </div>
-{% endblock content %}
+
+<script>
+  $(document).on("click", ".w-full.mt-4.rounded.bg-black", function(e) {
+    e.preventDefault();
+    var productId = $(this).data("product-id");  
+    var productQty = $("#select-" + productId + " option:selected").val();  
+    $.ajax({
+      type: "POST",
+      url: "{% url 'basket:basket_add' %}",
+      data: {
+        productid: productId,  
+        productqty: productQty,  
+        csrfmiddlewaretoken: "{{ csrf_token }}", 
+        action: "post"
+      },
+      success: function(json) {
+        document.getElementById("basket-qty").innerHTML = json.qty;
+      },
+      error: function(xhr, errmsg, err) {
+        console.error(errmsg);
+      }
+    });       
+  });
+</script>
+
+{% endblock %}

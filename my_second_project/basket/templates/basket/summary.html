@@ -1,3 +1,103 @@
 {% extends "base.html" %}
+
+{% block header %}
+{% endblock %}
+
 {% block content %}
-{% endblock content %}
+<div
+  class="relative max-w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl border border-gray-600 bg-gray-100 px-4 py-8 sm:px-6 lg:px-8 mx-auto"
+  aria-modal="true"
+  role="dialog"
+  tabindex="-1"
+>
+  <button class="absolute top-4 right-4 text-gray-600 transition hover:scale-110" aria-label="Close cart">
+    <span class="sr-only">Close cart</span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-6 h-6"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+
+  <div class="mt-4 space-y-6">
+    <ul class="space-y-4">
+      {% for item in basket %}
+        <li class="flex flex-col sm:flex-row items-center gap-4">
+          <img 
+            src="{{ item.product.photo.url }}" 
+            alt="{{ item.product.name }}" 
+            class="w-full sm:w-32 h-auto transition duration-500 group-hover:scale-105 sm:h-24 md:h-32 lg:h-36 object-cover"
+          />
+
+          <div class="flex-1 mt-2 sm:mt-0">
+            <h3 class="text-sm text-gray-900">{{ item.product.name }}</h3>
+            <h4 class="text-sm text-gray-900">Marca: {{ item.product.brand }}</h4>            
+          </div>
+
+          <div class="flex flex-1 items-center justify-end gap-2 mt-2 sm:mt-0">
+            <div>
+              <span>${{ item.total_price }}</span>
+            </div> 
+            <label for="select-{{ item.product.id }}" class="block text-sm text-gray-700">Cantidad</label>
+            <select id="select-{{ item.product.id }}" class="w-small mt-2 p-2 border border-gray-300 rounded-md">
+              <option selected>{{ item.qty }}</option>
+            </select>
+            <button type="button" class="btn btn-outline-secondary btn-sm delete-button" data-product-id="{{ item.product.id }}" aria-label="Delete">
+              Delete
+            </button>
+          </div>
+        </li>
+      {% empty %}
+        <p class="text-center text-gray-600">No items in your cart</p>
+      {% endfor %}
+    </ul>
+
+    <div class="space-y-4 text-center">
+      <div>
+        TOTAL <span id="subtotal">${{ basket.get_total_price }}</span>
+      </div>
+      <a
+        href="#"
+        class="block rounded-sm bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
+        aria-label="Checkout"
+      >
+        Checkout
+      </a>
+
+      <a
+        href="{% url 'list_product' %}"
+        class="inline-block text-sm text-gray-500 underline underline-offset-4 transition hover:text-gray-600"
+        aria-label="Continue shopping"
+      >
+        Continue shopping
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).on("click", ".delete-button", function(e) {
+    e.preventDefault();
+    var productId = $(this).data("product-id");
+    $.ajax({
+      type: "POST",
+      url: "{% url 'basket:basket_delete' %}",
+      data: {
+        productid: productId, 
+        csrfmiddlewaretoken: "{{ csrf_token }}", 
+        action: "post"
+      },
+      success: function(json) {
+        location.reload();
+      },
+      error: function(xhr, errmsg, err) {
+      }
+    });       
+ });
+</script>
+{% endblock %}

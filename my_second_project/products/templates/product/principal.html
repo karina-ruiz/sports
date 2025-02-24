@@ -1,8 +1,17 @@
-
 {% extends "base.html" %}
 {% block content %}
-<div class="cabecera_list text-center mb-8">
-    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-semibold">Productos en la categoría: {{ categoria.nombre }}</h1>
+<div class="container">
+  <div class="row categorias d-flex justify-content-start">
+    {% for categoria in categorias %}
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+        <a class="categorias_individuales d-block text-center" href="{% url 'categoria_detalle' categoria.id %}" aria-label="Ver productos en {{ categoria.nombre }}">
+          {{ categoria.nombre }}
+        </a>
+      </div>
+    {% empty %}
+      <p class="text-center w-100">No hay categorías disponibles</p>
+    {% endfor %}
+  </div>
 </div>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
@@ -16,11 +25,11 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
                     </svg>
                 </button>
-
+  
                 {% if product.photo %}
                     <img src="{{ product.photo.url }}" alt="{{ product.name }}" class="w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72 lg:h-80" aria-label="Imagen de {{ product.name }}"/>
                 {% endif %}
-
+  
                 <div class="relative border border-gray-100 bg-white p-6">
                     <h3 class="mt-4 text-lg font-medium text-gray-900">{{ product.name }}</h3>
                     <p class="mt-2 text-sm text-gray-700">${{ product.price }}</p>
@@ -28,20 +37,21 @@
             </a>
 
             <div class="p-6 bg-white">
-                <label for="select-{{ product.id }}" class="block text-sm text-gray-700">Cantidad</label>
-                <select id="select-{{ product.id }}" class="w-full mt-2 p-2 border border-gray-300 rounded-md">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
-                <button type="button" class="w-full mt-4 rounded bg-black p-4 text-white font-medium transition hover:scale-105" data-product-id="{{ product.id }}">
-                    Agregar al carrito
-                </button>
-            </div>
+              <label for="select-{{ product.id }}" class="block text-sm text-gray-700">Cantidad</label>
+              <select id="select-{{ product.id }}" class="w-full mt-2 p-2 border border-gray-300 rounded-md">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+              <button type="button" class="w-full mt-4 rounded bg-black p-4 text-white font-medium transition hover:scale-105" data-product-id="{{ product.id }}">
+                Agregar al carrito
+              </button>
+            </div>  
         </div>
     {% endfor %}
 </div>
+  
 <script>
     $(document).on("click", ".w-full.mt-4.rounded.bg-black", function(e) {
       e.preventDefault();
