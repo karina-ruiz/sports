@@ -1,0 +1,16 @@
+{%extends "base.html"%}
+{%  block header %}
+{% endblock %}
+{% block content %}
+<body class="bg-light py-5">
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="text-center bg-white p-5 rounded-lg shadow-lg w-75 w-md-50">
+            <h1 class="display-4 text-dark mb-4">Pago Exitoso</h1>
+            <p class="h5 text-muted mb-4">¡Gracias, <span class="font-weight-bold text-dark">{{ nombre }}</span>! Tu pago de <span class="font-weight-bold text-success">${{ monto }}</span> ha sido procesado exitosamente.</p>
+            <a href="{% url 'list_product' %}" class="btn btn-dark w-100 py-2 rounded-lg shadow-sm">
+                Continuar comprando
+            </a>
+        </div>
+    </div>
+</body>
+{%endblock%}

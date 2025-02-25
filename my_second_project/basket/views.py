@@ -38,4 +38,17 @@ def payment_form_view(request):
     form = PaymentForm()
     return render(request, 'basket/form_cart.html', {'form': form})
 
-
+def procesar_pago(request):
+    if request.method == 'POST':
+        form = PaymentForm(request.POST)
+        if form.is_valid():
+            print("Formulario válido")
+            print(form.cleaned_data)
+            form.save()
+            return render(request, 'basket/pago_exitoso.html', {'nombre': form.cleaned_data['name_cart'], 'monto': form.cleaned_data['cvv']})
+        else:
+            print("Formulario no válido")
+            print(form.errors)
+    else:
+        form = PaymentForm()
+    return render(request, 'basket/form_cart.html', {'form': form})

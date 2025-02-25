@@ -5,8 +5,12 @@
 <body class="bg-gray-100">
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-2xl font-semibold mb-6 text-center">Formulario de Pago</h1>
-        <form id="payment-form" method="post" action="" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+        <form id="payment-form" method="post" action="{% url 'basket:procesar_pago' %}" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
             {% csrf_token %}
+            <div class="mb-4">
+                <label for="id_name_cart" class="block text-sm font-medium text-gray-700">Nombre de Tarjeta</label>
+                {{ form.name_cart }}
+            </div>
             <div class="mb-4">
                 <label for="id_card_number" class="block text-sm font-medium text-gray-700">Número de Tarjeta</label>
                 {{ form.card_number }}
@@ -31,7 +35,4 @@
         </form>
     </div>
 </body>
-</html>
-
-
 {% endblock %}
