@@ -45,7 +45,10 @@ def procesar_pago(request):
             print("Formulario válido")
             print(form.cleaned_data)
             form.save()
-            return render(request, 'basket/pago_exitoso.html', {'nombre': form.cleaned_data['name_cart'], 'monto': form.cleaned_data['cvv']})
+            basket = Basket(request)
+            purchased_products = list(basket)
+            basket.clear()
+            return render(request, 'basket/pago_exitoso.html', {'nombre': form.cleaned_data['name_cart'], 'monto': form.cleaned_data['cvv'], 'productos': purchased_products})
         else:
             print("Formulario no válido")
             print(form.errors)

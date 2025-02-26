@@ -2,15 +2,31 @@
 {%  block header %}
 {% endblock %}
 {% block content %}
-<body class="bg-light py-5">
-    <div class="container d-flex justify-content-center align-items-center min-vh-100">
-        <div class="text-center bg-white p-5 rounded-lg shadow-lg w-75 w-md-50">
-            <h1 class="display-4 text-dark mb-4">Pago Exitoso</h1>
-            <p class="h5 text-muted mb-4">¡Gracias, <span class="font-weight-bold text-dark">{{ nombre }}</span>! Tu pago de <span class="font-weight-bold text-success">${{ monto }}</span> ha sido procesado exitosamente.</p>
-            <a href="{% url 'list_product' %}" class="btn btn-dark w-100 py-2 rounded-lg shadow-sm">
-                Continuar comprando
-            </a>
+<div class="container mx-auto mt-10">
+    <div class="card shadow-lg rounded-lg">
+        <div class="card-header bg-gray-800 text-white rounded-t-lg">
+            <h1 class="text-2xl font-bold">¡Gracias por tu compra, {{ nombre }}!</h1>
+        </div>
+        <div class="card-body p-6">
+            <p class="text-lg">El monto de tu compra fue: {{ monto }}</p>
+            <h2 class="text-xl font-semibold mt-4">Productos Comprados:</h2>
+            <ul class="list-group mt-2">
+                {% for item in productos %}
+                    <li class="list-group-item flex justify-between items-center">
+                        <div class="flex items-center">
+                            <img src="{{ item.product.photo.url }}" alt="{{ item.product.name }}" class="h-16 w-16 object-cover rounded-lg mr-4">
+                            <span>{{ item.product.name }}</span>
+                        </div>
+                        <span>{{ item.qty }} x {{ item.product.price }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
-</body>
+    <div class="card-footer mt-4">
+        <a href="{% url 'list_product' %}" class="btn btn-dark w-100 py-2 rounded-lg shadow-sm">
+            Continuar comprando
+        </a>
+    </div>
+</div>
 {%endblock%}

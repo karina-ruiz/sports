@@ -47,6 +47,12 @@ class Basket():
 
         self.save()
 
+
+    def clear(self):
+        self.session['skey'] = {}
+        self.save()
+
+
     def save(self):
         self.session.modified = True
         
