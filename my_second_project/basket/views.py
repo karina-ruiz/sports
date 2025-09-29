@@ -54,4 +54,4 @@ def procesar_pago(request):
             print(form.errors)
     else:
         form = PaymentForm()
-    return render(request, 'basket/form_cart.html', {'form': form})
+    return render(request, 'basket/form_cart.html', {'form': form}) 
